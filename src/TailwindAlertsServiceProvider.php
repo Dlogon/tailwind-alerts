@@ -24,5 +24,14 @@ class TailwindAlertsServiceProvider extends ServiceProvider
         {
             return \view("tailwindalerts::components/tailwind-alert");
         });
+
+        if ($this->app->runningInConsole())
+        {
+
+            $this->publishes([
+              __DIR__.'/../config/tailwind-alerts.php' => config_path('tailwind-alerts.php'),
+            ], 'config');
+
+        }
     }
 }
