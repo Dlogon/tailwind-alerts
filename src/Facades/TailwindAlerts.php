@@ -5,7 +5,7 @@ namespace Dlogon\TailwindAlerts\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \VendorName\Skeleton\Skeleton
+ * @see Dlogon\TailwindAlerts\TailwindAlerts
  */
 class TailwindAlerts extends Facade
 {
