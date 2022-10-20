@@ -29,6 +29,6 @@ class TailwindAlerts
             "message" => $message
         ];
         Session::forget($this->session_name);
-        Session::now($this->session_name, array_merge($currentMessages, [$message]));
+        Session::flash($this->session_name, array_merge($currentMessages, [$message]));
     }
 }
