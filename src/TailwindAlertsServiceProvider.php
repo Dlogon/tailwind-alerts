@@ -24,16 +24,14 @@ class TailwindAlertsServiceProvider extends ServiceProvider
         {
             return \view("tailwindalerts::components/tailwind-alert");
         });
-        Blade::directive('tailwind_alerts_css', function ()
-        {
-            return \view("tailwindalerts::styles");
-        });
-        Blade::directive('tailwind_alerts_scrips', function ()
-        {
-            return \view("tailwindalerts::scrips");
-        });
-
-
+        // Blade::directive('tailwind_alerts_css', function ()
+        // {
+        //     return \view("tailwindalerts::styles");
+        // });
+        // Blade::directive('tailwind_alerts_scrips', function ()
+        // {
+        //     return \view("tailwindalerts::scrips");
+        // });
         if ($this->app->runningInConsole())
         {
 

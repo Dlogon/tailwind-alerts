@@ -3,17 +3,13 @@
 namespace Dlogon\TailwindAlerts\Facades;
 
 use Illuminate\Support\Facades\Facade;
+use Dlogon\TailwindAlerts\TailwindAlertsConsts;
 
 /**
  * @see Dlogon\TailwindAlerts\TailwindAlerts
  */
-class TailwindAlerts extends Facade
+class TailwindAlerts extends Facade implements TailwindAlertsConsts
 {
-    const SUCCESS = "SUCCESS";
-    const ERROR = "ERROR";
-    const WARNING = "WARNING";
-    const INFO = "INFO";
-
     protected static function getFacadeAccessor()
     {
         return 'tailwindalerts';

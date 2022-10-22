@@ -19,6 +19,8 @@ You can install the package via composer:
 composer require dlogon/tailwind-alerts
 ```
 
+You need [tailwind](https://tailwindcss.com/) V2 or V3 and you need to check if you hace the default_alert_colors in your tailwind config file, if not, you can export the config file to change the default colors, or simply you can pass the background color you want in the level parameter.
+
 You can publish the config file with:
 
 ```bash
@@ -69,17 +71,34 @@ Route::get('/', function () {
 Result
 ![example](example.png?raw=true "example")
 
+the default position and type of the alert is bottom toast, you can use 4 types of alerts, calling the addSessionMessage whit the correct parameters, or calling the helper functions
+
+Then, you can use the facade in any part of your code to add a toast message
+```php
+use Dlogon\TailwindAlerts\Facades\TailwindAlerts;
+
+TailwindAlerts::addSessionMessage("Bottom toast", "bg-red-300", TailwindAlerts::BOTTOM_TOAST_CONTAINER, TailwindAlerts::TOAST_TEMPLATE );
+TailwindAlerts::addBottomToastMessage("Another bottom toast", TailwindAlerts::ERROR);
+
+TailwindAlerts::addTopToastMessage("Top toast", TailwindAlerts::WARNING);
+TailwindAlerts::addHeaderMessage("Header line", TailwindAlerts::ERROR);
+TailwindAlerts::addFooterMessage("Footer line", TailwindAlerts::DEFAULT_ALERT);
+```
+Result
+
+![diferent alerts](https://user-images.githubusercontent.com/26014056/197311450-cdef3660-626b-43dc-9f82-18c722e08c32.png)
+
+
+Where you use the component, you are able to use a javascript function to show alerts
+
+```javascript
+AlertToast.showToast("An error", AlertToast.ERROR, AlertToast.TOP_TOAST_CONTAINER, AlertToast.TOAST_TEMPLATE)
+```
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
-## Contributing
-
-Please see [CONTRIBUTING](https://github.com/spatie/.github/blob/main/CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
 
 ## Credits
 
