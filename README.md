@@ -19,8 +19,32 @@ You can install the package via composer:
 composer require dlogon/tailwind-alerts
 ```
 
-You need [tailwind](https://tailwindcss.com/) V2 or V3 and you need to check if your project has the default_alert_colors in your tailwind config file, if not, you can export the config file to change the default colors, or simply you can pass the background color you want in the level parameter.
+You need [tailwind](https://tailwindcss.com/) V2 or V3 and you need to check if your project has the default_alert_colors in your tailwind config file, if not, you can export the config file to change the default colors, or simply you can pass the background color you want in the level parameter, or you can add the config file inside the content node on module exports in your tailwind config file
 
+```javascript
+const defaultTheme = require('tailwindcss/defaultTheme');
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+    content: [
+        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+        './storage/framework/views/*.php',
+        './resources/views/**/*.blade.php',
+        './vendor/dlogon/tailwind-alerts/config/tailwind-alerts.php',
+    ],
+
+    theme: {
+        extend: {
+            fontFamily: {
+                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+            },
+        },
+
+    },
+
+    plugins: [require('@tailwindcss/forms')],
+};
+```
 You can publish the config file with:
 
 ```bash
