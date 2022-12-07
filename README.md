@@ -19,7 +19,7 @@ You can install the package via composer:
 composer require dlogon/tailwind-alerts
 ```
 
-You need [tailwind](https://tailwindcss.com/) V2 or V3 and you need to check if you hace the default_alert_colors in your tailwind config file, if not, you can export the config file to change the default colors, or simply you can pass the background color you want in the level parameter.
+You need [tailwind](https://tailwindcss.com/) V2 or V3 and you need to check if your project has the default_alert_colors in your tailwind config file, if not, you can export the config file to change the default colors, or simply you can pass the background color you want in the level parameter.
 
 You can publish the config file with:
 
@@ -58,18 +58,27 @@ or you can choose the component style
 
 Then, you can use the facade in any part of your code to add a toast message
 ```php
-use Dlogon\TailwindAlerts\Facades\TailwindAlerts;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+namespace App\Http\Controllers;
 
-Route::get('/', function () {
-    TailwindAlerts::addSessionMessage("This beautifull asset as been saved", TailwindAlerts::SUCCESS);
-    return view('welcome');
+use App\Models\MyModel;
+use Dlogon\TailwindAlerts\Facades\TailwindAlerts;
+class MyController extends Controller
+{
+    ...
+    public function store(Request $request) 
+    {
+        TailwindAlerts::addSessionMessage("This beautifull asset as been saved", TailwindAlerts::SUCCESS);
+        Mymodel::create($request->all())
+        return redirect()->route("My.index");
+    }
+    ...
 });
 ```
 
 Result
 ![example](example.png?raw=true "example")
+
+
 
 the default position and type of the alert is bottom toast, you can use 4 types of alerts, calling the addSessionMessage whit the correct parameters, or calling the helper functions
 
@@ -87,6 +96,23 @@ TailwindAlerts::addFooterMessage("Footer line", TailwindAlerts::DEFAULT_ALERT);
 Result
 
 ![diferent alerts](https://user-images.githubusercontent.com/26014056/197311450-cdef3660-626b-43dc-9f82-18c722e08c32.png)
+
+If your response is not a redirect response, then you should set the 
+```$IsResponseRedirect``` static variable to false using the method ```setResponseRedirect(bool $value)``` if you use the helper functions, or you can set the last parameter in ```addSessionMessage()``` to ```false```
+
+```php
+use Dlogon\TailwindAlerts\Facades\TailwindAlerts;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', function () {
+    TailwindAlerts::setResponseRedirect(false);
+    TailwindAlerts::addSessionMessage("Welcome", TailwindAlerts::SUCCESS);
+    return view('welcome');
+});
+```
+
+
 
 
 Where you use the component, you are able to use a javascript function to show alerts
