@@ -16,14 +16,17 @@
     <div id="line_template" style="display: none" class="alert-footer">
         <input type="checkbox" class="hidden alert_tailwind_checkbox">
         <div class="flex items-center justify-between w-full p-2 bg-blue-500 shadow text-white">
-          <p></p>
-          <label class="close cursor-pointer level" title="close">
-            <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-              <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
-            </svg>
-          </label>
+            <p></p>
+            <label class="close cursor-pointer level" title="close">
+                <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                    viewBox="0 0 18 18">
+                    <path
+                        d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+                    </path>
+                </svg>
+            </label>
         </div>
-      </div>
+    </div>
     <div id="bottom_toast_container" class="fixed bottom-0 right-0 m-8 w-5/6 md:w-full max-w-sm">
     </div>
     <div id="top_toast_container" class="fixed top-0 right-0 m-8 w-5/6 md:w-full max-w-sm">
@@ -245,7 +248,6 @@
     <script>
         var closeDiv = function(ev) {
             var divToCloseId = ev.target.dataset.alertId;
-
             setTimeout(function() {
                 let div = document.getElementById(divToCloseId);
                 div.remove();
@@ -256,13 +258,14 @@
             TOP_TOAST_CONTAINER: "top_toast_container",
             FOOTER_CONTAINER: "footer_container",
             HEADER_CONTAINER: "header_container",
-            TOAST_TEMPLATE:"toast_template",
+            TOAST_TEMPLATE: "toast_template",
             LINE_TEMPLATE: "line_template",
             SUCCESS: "{{ config('tailwind-alerts.default_alert_colors.SUCCESS') }}",
             ERROR: "{{ config('tailwind-alerts.default_alert_colors.ERROR') }}",
             WARNING: "{{ config('tailwind-alerts.default_alert_colors.WARNING') }}",
             INFO: "{{ config('tailwind-alerts.default_alert_colors.INFO') }}",
-            showToast: function(message, level, container = this.BOTTOM_TOAST_CONTAINER, template = this.TOAST_TEMPLATE) {
+            showToast: function(message, level, container = this.BOTTOM_TOAST_CONTAINER, template = this
+                .TOAST_TEMPLATE) {
 
                 let divId = (Math.random() + 1).toString(36).substring(7);
                 let checkId = (Math.random() + 1).toString(36).substring(7);
@@ -284,13 +287,19 @@
 
                 alertContainer.appendChild(div);
                 div.style.display = "block";
+
+                setTimeout(function() {
+                    check.click();
+                }, 3000);
+
             }
         }
     </script>
     @if (Session::has(config('tailwind-alerts.session_name')))
         @foreach (session(config('tailwind-alerts.session_name')) as $k => $alert)
             <script>
-                AlertToast.showToast("{{ $alert['message'] }}", "{{ $alert['level'] }}", "{{ $alert['container'] }}", "{{ $alert['template'] }}")
+                AlertToast.showToast("{{ $alert['message'] }}", "{{ $alert['level'] }}", "{{ $alert['container'] }}",
+                    "{{ $alert['template'] }}")
             </script>
         @endforeach
     @endif
